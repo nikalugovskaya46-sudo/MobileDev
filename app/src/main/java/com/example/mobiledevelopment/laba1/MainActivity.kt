@@ -33,6 +33,21 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     var result by remember { mutableStateOf("") }
 
+    val analyzer = TextAnalyzer()
+
+    val text = """
+        Вода
+        Ведро
+        Лава
+        Лавовое озеро
+        Алмаз
+        Алмазная кирка
+        Еда
+        Факел
+        Блоки
+        Кровать
+    """.trimIndent()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -45,9 +60,18 @@ fun MainScreen() {
             text = "Найдите самые популярные первые буквы слов в данном тексте."
         )
 
+        Text(
+            text = "Список предметов:",
+            modifier = Modifier.padding(top = 20.dp)
+        )
+        Text(
+            text = text,
+            modifier = Modifier.padding(top = 10.dp)
+        )
+
         Button(
             onClick = {
-                result = "Результат"
+                result = analyzer.findMostPopularWords(text)
             },
             modifier = Modifier.padding(top = 20.dp)
         ) {
