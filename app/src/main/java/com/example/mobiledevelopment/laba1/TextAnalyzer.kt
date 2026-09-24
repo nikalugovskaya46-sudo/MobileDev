@@ -1,7 +1,7 @@
 package com.example.mobiledevelopment.laba1
 
 class TextAnalyzer {
-
+//для обновления коммита
     fun findMostPopularWords(text: String): String {
 
         val words = text
