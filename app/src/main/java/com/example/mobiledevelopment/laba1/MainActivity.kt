@@ -1,5 +1,11 @@
 package com.example.mobiledevelopment.laba1
 
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.ui.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,6 +21,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.mobiledevelopment.ui.theme.MobileDevelopmentTheme
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import com.example.mobiledevelopment.R
+import androidx.compose.foundation.layout.size
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,34 +42,4 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun MainScreen() {
-    var result by remember { mutableStateOf("") }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-
-        Text(
-            text = "Найдите самые популярные первые буквы слов в данном тексте."
-        )
-
-        Button(
-            onClick = {
-                result = "Результат"
-            },
-            modifier = Modifier.padding(top = 20.dp)
-        ) {
-            Text("Проверить себя")
-        }
-
-        Text(
-            text = result,
-            modifier = Modifier.padding(top = 20.dp)
-        )
-    }
-}
