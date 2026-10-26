@@ -2,18 +2,10 @@ package com.example.mobiledevelopment.laba2.ui.comic
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
@@ -21,31 +13,29 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import com.example.mobiledevelopment.R
-import com.example.mobiledevelopment.laba2.ui.components.MenuButton
-import androidx.compose.material3.Text
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mobiledevelopment.R
+import com.example.mobiledevelopment.laba2.ui.components.MenuButton
 
 @Composable
 fun ComicScreen(
     imageRes: Int,
     buttonText: String,
     onNext: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    backgroundRes: Int = R.drawable.menu_background,
+    titleRes: Int = R.string.comic_morning,
+    buttonEnabled: Boolean = true
 ) {
     Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(Color.Black)
+        modifier = modifier.fillMaxSize()
     ) {
         Image(
-            bitmap = ImageBitmap.imageResource(
-                R.drawable.menu_background
-            ),
+            bitmap = ImageBitmap.imageResource(backgroundRes),
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
@@ -55,9 +45,7 @@ fun ComicScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(
-                    Color.Black.copy(alpha = 0.50f)
-                )
+                .background(Color.Black.copy(alpha = 0.3f))
         )
 
         Column(
@@ -65,30 +53,27 @@ fun ComicScreen(
                 .fillMaxSize()
                 .systemBarsPadding()
                 .padding(
-                    horizontal = 12.dp,
-                    vertical = 16.dp
-                )
+                    horizontal = 16.dp,
+                    vertical = 12.dp
+                ),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(R.string.comic_morning),
+                text = stringResource(titleRes),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
                 color = Color.White,
                 fontFamily = FontFamily(
                     Font(R.font.brusbylyajka)
                 ),
                 fontSize = 28.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = 8.dp,
-                        bottom = 16.dp
-                    )
+                lineHeight = 34.sp,
+                textAlign = TextAlign.Center
             )
 
             Image(
-                bitmap = ImageBitmap.imageResource(
-                    imageRes
-                ),
+                bitmap = ImageBitmap.imageResource(imageRes),
                 contentDescription = stringResource(
                     R.string.comic_description
                 ),
@@ -100,7 +85,7 @@ fun ComicScreen(
             )
 
             Spacer(
-                modifier = Modifier.height(12.dp)
+                modifier = Modifier.height(16.dp)
             )
 
             Row(
@@ -110,6 +95,7 @@ fun ComicScreen(
                 MenuButton(
                     text = buttonText,
                     onClick = onNext,
+                    enabled = buttonEnabled,
                     modifier = Modifier.width(144.dp)
                 )
             }
