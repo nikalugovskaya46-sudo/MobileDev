@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="level1_title">Найди 5 вещей</string>
+
+    <string name="level1_instruction">Фонарик • Карта • Сироп\nТермокружка • Компас</string>
+
+    <string name="item_compass">Компас</string>
+    <string name="item_flashlight">Фонарик</string>
+    <string name="item_mug">Термокружка</string>
+    <string name="item_map">Карта</string>
+    <string name="item_syrup">Сироп</string>
+
+    <string name="item_found">Найдено</string>
+    <string name="item_not_found">Не найдено</string>
+
+    <string name="level1_success_title">Молодец!</string>
+    <string name="level1_home">На главную</string>
+</resources>
