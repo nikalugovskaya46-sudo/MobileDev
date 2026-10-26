@@ -18,6 +18,7 @@ import com.example.mobiledevelopment.laba2.ui.comic.ComicScreen
 import com.example.mobiledevelopment.laba2.ui.level1.FirstLevelItems
 import com.example.mobiledevelopment.laba2.ui.level1.FirstLevelScreen
 import com.example.mobiledevelopment.laba2.ui.menu.MainMenuScreen
+import com.example.mobiledevelopment.laba2.ui.level2.SecondLevelScreen
 
 class GameActivity : ComponentActivity() {
 
@@ -77,7 +78,6 @@ class GameActivity : ComponentActivity() {
                                 currentScreen = "menu"
                             }
                         }
-
                         "first_level" -> {
                             currentScreen = "menu"
                         }
@@ -87,6 +87,9 @@ class GameActivity : ComponentActivity() {
                             } else {
                                 currentScreen = "menu"
                             }
+                        }
+                        "second_level" -> {
+                            currentScreen = "menu"
                         }
                     }
                 }
@@ -176,15 +179,19 @@ class GameActivity : ComponentActivity() {
                                 R.string.comic_next
                             ),
 
-                            buttonEnabled =
-                                princessComicPage < princessPages.lastIndex,
-
                             onNext = {
-                                if (
-                                    princessComicPage < princessPages.lastIndex
-                                ) {
+                                if (princessComicPage < princessPages.lastIndex) {
                                     princessComicPage++
+                                } else {
+                                    currentScreen = "second_level"
                                 }
+                            }
+                        )
+                    }
+                    "second_level" -> {
+                        SecondLevelScreen(
+                            onBackToMenu = {
+                                currentScreen = "menu"
                             }
                         )
                     }
