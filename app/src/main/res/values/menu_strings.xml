@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_title">На поиски Джейка</string>
+    <string name="menu_new_game">Новая игра</string>
+    <string name="menu_continue">Продолжить</string>
+    <string name="menu_settings">Настройки</string>
+
+    <string name="comic_next">Далее</string>
+    <string name="comic_description">Вступительный комикс</string>
+    <string name="back_to_menu">В меню</string>
+    <string name="comic_morning">Сегодня утром</string>
+</resources>
