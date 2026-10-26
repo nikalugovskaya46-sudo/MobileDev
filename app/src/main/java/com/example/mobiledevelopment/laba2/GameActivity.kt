@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,7 +18,6 @@ import com.example.mobiledevelopment.laba2.ui.comic.ComicScreen
 import com.example.mobiledevelopment.laba2.ui.level1.FirstLevelItems
 import com.example.mobiledevelopment.laba2.ui.level1.FirstLevelScreen
 import com.example.mobiledevelopment.laba2.ui.menu.MainMenuScreen
-import androidx.activity.enableEdgeToEdge
 
 class GameActivity : ComponentActivity() {
 
@@ -35,18 +35,24 @@ class GameActivity : ComponentActivity() {
             R.drawable.intro_3
         )
 
+        val princessPages = listOf(
+            R.drawable.princess_1,
+            R.drawable.princess_2
+        )
         val validItemIds = FirstLevelItems.items
             .map { it.id }
             .toSet()
 
         setContent {
             MaterialTheme {
-
                 var currentScreen by rememberSaveable {
                     mutableStateOf("menu")
                 }
 
                 var comicPage by rememberSaveable {
+                    mutableStateOf(0)
+                }
+                var princessComicPage by rememberSaveable {
                     mutableStateOf(0)
                 }
 
@@ -75,22 +81,30 @@ class GameActivity : ComponentActivity() {
                         "first_level" -> {
                             currentScreen = "menu"
                         }
+                        "princess_comic" -> {
+                            if (princessComicPage > 0) {
+                                princessComicPage--
+                            } else {
+                                currentScreen = "menu"
+                            }
+                        }
                     }
                 }
 
                 when (currentScreen) {
-
                     "menu" -> {
                         MainMenuScreen(
                             onNewGame = {
                                 progressStorage.resetProgress()
                                 foundItemIds = emptySet()
                                 comicPage = 0
+                                princessComicPage = 0
                                 currentScreen = "comic"
                             },
 
                             onContinue = {
-                                currentScreen = "first_level"
+                                princessComicPage = 0
+                                currentScreen = "princess_comic"
                             },
 
                             onSettings = {},
@@ -131,17 +145,46 @@ class GameActivity : ComponentActivity() {
 
                                     foundItemIds = updatedItems
 
-                                    progressStorage
-                                        .saveFirstLevelProgress(
-                                            foundItemIds = updatedItems,
-                                            completed = updatedItems
-                                                .containsAll(validItemIds)
-                                        )
+                                    progressStorage.saveFirstLevelProgress(
+                                        foundItemIds = updatedItems,
+                                        completed = updatedItems
+                                            .containsAll(validItemIds)
+                                    )
                                 }
                             },
 
                             onBackToMenu = {
                                 currentScreen = "menu"
+                            },
+
+                            onContinue = {
+                                princessComicPage = 0
+                                currentScreen = "princess_comic"
+                            }
+                        )
+                    }
+
+                    "princess_comic" -> {
+                        ComicScreen(
+                            imageRes = princessPages[princessComicPage],
+
+                            backgroundRes = R.drawable.level2_background,
+
+                            titleRes = R.string.princess_comic_title,
+
+                            buttonText = stringResource(
+                                R.string.comic_next
+                            ),
+
+                            buttonEnabled =
+                                princessComicPage < princessPages.lastIndex,
+
+                            onNext = {
+                                if (
+                                    princessComicPage < princessPages.lastIndex
+                                ) {
+                                    princessComicPage++
+                                }
                             }
                         )
                     }

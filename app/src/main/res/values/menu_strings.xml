@@ -9,4 +9,6 @@
     <string name="comic_description">Вступительный комикс</string>
     <string name="back_to_menu">В меню</string>
     <string name="comic_morning">Сегодня утром</string>
+
+    <string name="princess_comic_title">У принцессы</string>
 </resources>

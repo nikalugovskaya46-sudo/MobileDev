@@ -36,6 +36,7 @@ fun FirstLevelScreen(
     foundItemIds: Set<String>,
     onItemFound: (String) -> Unit,
     onBackToMenu: () -> Unit,
+    onContinue: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val items = FirstLevelItems.items
@@ -214,6 +215,7 @@ fun FirstLevelScreen(
         LevelCompleteDialog(
             onContinue = {
                 completionDialogClosed = true
+                onContinue()
             },
             onMainMenu = {
                 completionDialogClosed = true
