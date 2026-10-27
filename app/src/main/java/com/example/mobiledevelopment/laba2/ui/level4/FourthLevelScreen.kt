@@ -42,6 +42,7 @@ private val PortalTextColor = Color(0xFF451F00)
 @Composable
 fun FourthLevelScreen(
     onBackToMenu: () -> Unit,
+    onContinue: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var digits by rememberSaveable {
@@ -198,6 +199,7 @@ fun FourthLevelScreen(
         LevelCompleteDialog(
             onContinue = {
                 showSuccessDialog = false
+                onContinue()
             },
             onMainMenu = {
                 showSuccessDialog = false

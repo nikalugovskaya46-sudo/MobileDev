@@ -44,6 +44,20 @@ class ProgressStorage(context: Context) {
         preferences.edit()
             .remove("first_level_found_items")
             .remove("first_level_completed")
+            .remove("quest_completed")
+            .apply()
+    }
+
+    fun isQuestCompleted(): Boolean {
+        return preferences.getBoolean(
+            "quest_completed",
+            false
+        )
+    }
+
+    fun completeQuest() {
+        preferences.edit()
+            .putBoolean("quest_completed", true)
             .apply()
     }
 }

@@ -13,4 +13,10 @@
     <string name="princess_comic_title">У принцессы</string>
     <string name="marceline_comic_title">У Марселин</string>
     <string name="lumpy_comic_title">У Пупырки</string>
+
+    <string name="ending_finish">Далее</string>
+    <string name="ending_replay">Играть снова</string>
+
+    <string name="ending_title">Джейк\nнайден!</string>
+    <string name="ending_home">На главную</string>
 </resources>

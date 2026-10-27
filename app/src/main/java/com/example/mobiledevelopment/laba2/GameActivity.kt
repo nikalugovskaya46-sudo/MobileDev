@@ -21,6 +21,7 @@ import com.example.mobiledevelopment.laba2.ui.menu.MainMenuScreen
 import com.example.mobiledevelopment.laba2.ui.level2.SecondLevelScreen
 import com.example.mobiledevelopment.laba2.ui.level3.ThirdLevelScreen
 import com.example.mobiledevelopment.laba2.ui.level4.FourthLevelScreen
+import com.example.mobiledevelopment.laba2.ui.result.ResultScreen
 
 class GameActivity : ComponentActivity() {
 
@@ -51,6 +52,12 @@ class GameActivity : ComponentActivity() {
         val lumpyPages = listOf(
             R.drawable.lumpy_1,
             R.drawable.lumpy_2
+        )
+
+        val endingPages = listOf(
+            R.drawable.ending_1,
+            R.drawable.ending_2,
+            R.drawable.ending_3
         )
 
         val validItemIds = FirstLevelItems.items
@@ -85,8 +92,33 @@ class GameActivity : ComponentActivity() {
                     )
                 }
 
+                var endingPage by rememberSaveable {
+                    mutableStateOf(0)
+                }
+
+                var questCompleted by remember {
+                    mutableStateOf(
+                        progressStorage.isQuestCompleted()
+                    )
+                }
+
                 val firstLevelCompleted =
                     foundItemIds.containsAll(validItemIds)
+
+                val startNewGame: () -> Unit = {
+                    progressStorage.resetProgress()
+
+                    foundItemIds = emptySet()
+                    questCompleted = false
+
+                    comicPage = 0
+                    princessComicPage = 0
+                    marcelineComicPage = 0
+                    lumpyComicPage = 0
+                    endingPage = 0
+
+                    currentScreen = "comic"
+                }
 
                 BackHandler(
                     enabled = currentScreen != "menu"
@@ -132,30 +164,37 @@ class GameActivity : ComponentActivity() {
                         "fourth_level" -> {
                             currentScreen = "menu"
                         }
+                        "ending_comic" -> {
+                            if (endingPage > 0) {
+                                endingPage--
+                            } else {
+                                currentScreen = "menu"
+                            }
+                        }
+
+                        "result" -> {
+                            currentScreen = "menu"
+                        }
                     }
                 }
 
                 when (currentScreen) {
                     "menu" -> {
                         MainMenuScreen(
-                            onNewGame = {
-                                progressStorage.resetProgress()
-                                foundItemIds = emptySet()
-                                comicPage = 0
-                                princessComicPage = 0
-                                currentScreen = "comic"
-                                marcelineComicPage = 0
-                                lumpyComicPage = 0
-                            },
+                            onNewGame = startNewGame,
 
                             onContinue = {
-                                princessComicPage = 0
-                                currentScreen = "princess_comic"
+                                if (questCompleted) {
+                                    currentScreen = "result"
+                                } else {
+                                    princessComicPage = 0
+                                    currentScreen = "princess_comic"
+                                }
                             },
 
                             onSettings = {},
 
-                            canContinue = firstLevelCompleted,
+                            canContinue = firstLevelCompleted || questCompleted,
 
                             settingsEnabled = false
                         )
@@ -299,7 +338,47 @@ class GameActivity : ComponentActivity() {
                         FourthLevelScreen(
                             onBackToMenu = {
                                 currentScreen = "menu"
+                            },
+                            onContinue = {
+                                endingPage = 0
+                                currentScreen = "ending_comic"
                             }
+                        )
+                    }
+                    "ending_comic" -> {
+                        ComicScreen(
+                            imageRes = endingPages[endingPage],
+
+                            backgroundRes = R.drawable.level4_background,
+
+                            titleRes = R.string.ending_title,
+
+                            buttonText = stringResource(
+                                if (endingPage < endingPages.lastIndex) {
+                                    R.string.comic_next
+                                } else {
+                                    R.string.ending_finish
+                                }
+                            ),
+
+                            onNext = {
+                                if (endingPage < endingPages.lastIndex) {
+                                    endingPage++
+                                } else {
+                                    progressStorage.completeQuest()
+                                    questCompleted = true
+                                    currentScreen = "result"
+                                }
+                            }
+                        )
+                    }
+
+                    "result" -> {
+                        ResultScreen(
+                            onMainMenu = {
+                                currentScreen = "menu"
+                            },
+                            onRestart = startNewGame
                         )
                     }
                 }
