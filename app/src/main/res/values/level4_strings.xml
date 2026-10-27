@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="level4_title">Разгадай пароль</string>
+    <string name="level4_spin">КРУТИ!</string>
+    <string name="level4_open">Открыть портал</string>
+
+    <string name="level4_instruction">1. Каждая цифра используется ровно один раз. \n\n2. Вторая цифра на единицу больше первой.\n\n3. Четвёртая цифра на единицу больше третьей.\n\n4. Первая цифра больше третьей.</string>
+</resources>

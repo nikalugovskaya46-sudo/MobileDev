@@ -3,5 +3,5 @@
     <string name="level2_title">Почини трубы!</string>
     <string name="level2_check">Пустить сироп</string>
 
-    <string name="level2_instruction">1. Нажимай на трубы, чтобы поворачивать их на 90°.\n\n2. Соедини вход слева сверху с выходом снизу справа.\n\n3. Используй все девять труб.</string>
+    <string name="level2_instruction">1. Нажимай на трубы, чтобы поворачивать их на 90°.\n\n2. Соедини вход слева сверху с выходом снизу справа.</string>
 </resources>
