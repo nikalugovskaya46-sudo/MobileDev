@@ -19,6 +19,7 @@ import com.example.mobiledevelopment.laba2.ui.level1.FirstLevelItems
 import com.example.mobiledevelopment.laba2.ui.level1.FirstLevelScreen
 import com.example.mobiledevelopment.laba2.ui.menu.MainMenuScreen
 import com.example.mobiledevelopment.laba2.ui.level2.SecondLevelScreen
+import com.example.mobiledevelopment.laba2.ui.level3.ThirdLevelScreen
 
 class GameActivity : ComponentActivity() {
 
@@ -107,6 +108,9 @@ class GameActivity : ComponentActivity() {
                             } else {
                                 currentScreen = "menu"
                             }
+                        }
+                        "third_level" -> {
+                            currentScreen = "menu"
                         }
                     }
                 }
@@ -229,13 +233,19 @@ class GameActivity : ComponentActivity() {
                                 R.string.comic_next
                             ),
 
-                            buttonEnabled =
-                                marcelineComicPage < marcelinePages.lastIndex,
-
                             onNext = {
                                 if (marcelineComicPage < marcelinePages.lastIndex) {
                                     marcelineComicPage++
+                                } else {
+                                    currentScreen = "third_level"
                                 }
+                            }
+                        )
+                    }
+                    "third_level" -> {
+                        ThirdLevelScreen(
+                            onBackToMenu = {
+                                currentScreen = "menu"
                             }
                         )
                     }
