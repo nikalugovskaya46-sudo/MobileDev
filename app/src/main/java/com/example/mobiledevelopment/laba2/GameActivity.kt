@@ -40,6 +40,12 @@ class GameActivity : ComponentActivity() {
             R.drawable.princess_1,
             R.drawable.princess_2
         )
+
+        val marcelinePages = listOf(
+            R.drawable.marceline_1,
+            R.drawable.marceline_2
+        )
+
         val validItemIds = FirstLevelItems.items
             .map { it.id }
             .toSet()
@@ -54,6 +60,10 @@ class GameActivity : ComponentActivity() {
                     mutableStateOf(0)
                 }
                 var princessComicPage by rememberSaveable {
+                    mutableStateOf(0)
+                }
+
+                var marcelineComicPage by rememberSaveable {
                     mutableStateOf(0)
                 }
 
@@ -91,6 +101,13 @@ class GameActivity : ComponentActivity() {
                         "second_level" -> {
                             currentScreen = "menu"
                         }
+                        "marceline_comic" -> {
+                            if (marcelineComicPage > 0) {
+                                marcelineComicPage--
+                            } else {
+                                currentScreen = "menu"
+                            }
+                        }
                     }
                 }
 
@@ -103,6 +120,7 @@ class GameActivity : ComponentActivity() {
                                 comicPage = 0
                                 princessComicPage = 0
                                 currentScreen = "comic"
+                                marcelineComicPage = 0
                             },
 
                             onContinue = {
@@ -192,6 +210,32 @@ class GameActivity : ComponentActivity() {
                         SecondLevelScreen(
                             onBackToMenu = {
                                 currentScreen = "menu"
+                            },
+                            onContinue = {
+                                marcelineComicPage = 0
+                                currentScreen = "marceline_comic"
+                            }
+                        )
+                    }
+                    "marceline_comic" -> {
+                        ComicScreen(
+                            imageRes = marcelinePages[marcelineComicPage],
+
+                            backgroundRes = R.drawable.level3_background,
+
+                            titleRes = R.string.marceline_comic_title,
+
+                            buttonText = stringResource(
+                                R.string.comic_next
+                            ),
+
+                            buttonEnabled =
+                                marcelineComicPage < marcelinePages.lastIndex,
+
+                            onNext = {
+                                if (marcelineComicPage < marcelinePages.lastIndex) {
+                                    marcelineComicPage++
+                                }
                             }
                         )
                     }

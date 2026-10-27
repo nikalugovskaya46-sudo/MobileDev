@@ -47,6 +47,7 @@ private val PixelFont = FontFamily(
 @Composable
 fun SecondLevelScreen(
     onBackToMenu: () -> Unit,
+    onContinue: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var rotations by rememberSaveable {
@@ -256,6 +257,7 @@ fun SecondLevelScreen(
         LevelCompleteDialog(
             onContinue = {
                 showSuccessDialog = false
+                onContinue()
             },
             onMainMenu = {
                 showSuccessDialog = false
