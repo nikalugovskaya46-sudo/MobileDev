@@ -47,6 +47,11 @@ class GameActivity : ComponentActivity() {
             R.drawable.marceline_2
         )
 
+        val lumpyPages = listOf(
+            R.drawable.lumpy_1,
+            R.drawable.lumpy_2
+        )
+
         val validItemIds = FirstLevelItems.items
             .map { it.id }
             .toSet()
@@ -65,6 +70,10 @@ class GameActivity : ComponentActivity() {
                 }
 
                 var marcelineComicPage by rememberSaveable {
+                    mutableStateOf(0)
+                }
+
+                var lumpyComicPage by rememberSaveable {
                     mutableStateOf(0)
                 }
 
@@ -112,6 +121,13 @@ class GameActivity : ComponentActivity() {
                         "third_level" -> {
                             currentScreen = "menu"
                         }
+                        "lumpy_comic" -> {
+                            if (lumpyComicPage > 0) {
+                                lumpyComicPage--
+                            } else {
+                                currentScreen = "menu"
+                            }
+                        }
                     }
                 }
 
@@ -125,6 +141,7 @@ class GameActivity : ComponentActivity() {
                                 princessComicPage = 0
                                 currentScreen = "comic"
                                 marcelineComicPage = 0
+                                lumpyComicPage = 0
                             },
 
                             onContinue = {
@@ -246,6 +263,32 @@ class GameActivity : ComponentActivity() {
                         ThirdLevelScreen(
                             onBackToMenu = {
                                 currentScreen = "menu"
+                            },
+                            onContinue = {
+                                lumpyComicPage = 0
+                                currentScreen = "lumpy_comic"
+                            }
+                        )
+                    }
+                    "lumpy_comic" -> {
+                        ComicScreen(
+                            imageRes = lumpyPages[lumpyComicPage],
+
+                            backgroundRes = R.drawable.level4_background,
+
+                            titleRes = R.string.lumpy_comic_title,
+
+                            buttonText = stringResource(
+                                R.string.comic_next
+                            ),
+
+                            buttonEnabled =
+                                lumpyComicPage < lumpyPages.lastIndex,
+
+                            onNext = {
+                                if (lumpyComicPage < lumpyPages.lastIndex) {
+                                    lumpyComicPage++
+                                }
                             }
                         )
                     }

@@ -31,6 +31,7 @@ import com.example.mobiledevelopment.laba2.ui.level1.LevelCompleteDialog
 @Composable
 fun ThirdLevelScreen(
     onBackToMenu: () -> Unit,
+    onContinue: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var placedCardIds by rememberSaveable {
@@ -132,6 +133,7 @@ fun ThirdLevelScreen(
         LevelCompleteDialog(
             onContinue = {
                 showSuccessDialog = false
+                onContinue()
             },
             onMainMenu = {
                 showSuccessDialog = false
