@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mobiledevelopment.R
 import com.example.mobiledevelopment.laba2.ui.components.MenuButton
 import com.example.mobiledevelopment.laba2.ui.level1.LevelCompleteDialog
+import com.example.mobiledevelopment.laba2.ui.components.LevelHeader
 
 private val PortalFont = FontFamily(
     Font(R.font.brusbylyajka)
@@ -83,21 +84,20 @@ fun FourthLevelScreen(
                 modifier = Modifier.height(topSpace)
             )
 
-            PortalPanel(
-                modifier = Modifier
-                    .widthIn(max = 460.dp)
-                    .fillMaxWidth()
+            LevelHeader(
+                onHomeClick = onBackToMenu,
+                modifier = Modifier.widthIn(max = 460.dp)
             ) {
-                Text(
-                    text = stringResource(
-                        R.string.level4_title
-                    ),
-                    color = PortalTextColor,
-                    fontFamily = PortalFont,
-                    fontSize = 24.sp,
-                    lineHeight = 28.sp,
-                    textAlign = TextAlign.Center
-                )
+                PortalPanel(modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        text = stringResource(R.string.level4_title),
+                        color = PortalTextColor,
+                        fontFamily = PortalFont,
+                        fontSize = 24.sp,
+                        lineHeight = 28.sp,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
 
             Spacer(
