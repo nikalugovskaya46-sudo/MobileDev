@@ -35,6 +35,7 @@ private val SettingsTextColor = Color(0xFF451F00)
 fun SettingsScreen(
     modifier: Modifier = Modifier,
     onBack: () -> Unit,
+    musicEnabled: Boolean = true,
     onLanguageClick: () -> Unit = {},
     onMusicClick: () -> Unit = {}
 ) {
@@ -109,8 +110,11 @@ fun SettingsScreen(
 
                         SettingsOption(
                             label = stringResource(R.string.settings_music),
-                            value = stringResource(R.string.settings_music_on),
-                            buttonWidth = 116.dp,
+                            value = stringResource(
+                                if (musicEnabled) R.string.settings_music_on
+                                else R.string.settings_music_off
+                            ),
+                            buttonWidth = 140.dp,
                             onClick = onMusicClick
                         )
                         MenuButton(

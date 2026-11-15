@@ -13,6 +13,8 @@
     <string name="settings_language_code_en">EN</string>
     <string name="settings_music_en">Music</string>
     <string name="settings_music_on_en">ON</string>
+    <string name="settings_music_off">ВЫКЛ</string>
+    <string name="settings_music_off_en">OFF</string>
 
     <string name="comic_morning_en">This Morning</string>
     <string name="comic_description_en">Comic page</string>

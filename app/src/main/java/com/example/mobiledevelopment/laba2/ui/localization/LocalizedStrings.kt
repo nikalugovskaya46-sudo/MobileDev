@@ -19,6 +19,7 @@ private val englishStrings = mapOf(
     R.string.settings_language_code to R.string.settings_language_code_en,
     R.string.settings_music to R.string.settings_music_en,
     R.string.settings_music_on to R.string.settings_music_on_en,
+    R.string.settings_music_off to R.string.settings_music_off_en,
 
     R.string.comic_morning to R.string.comic_morning_en,
     R.string.comic_description to R.string.comic_description_en,
