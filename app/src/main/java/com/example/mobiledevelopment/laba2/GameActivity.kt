@@ -22,6 +22,7 @@ import com.example.mobiledevelopment.laba2.ui.level2.SecondLevelScreen
 import com.example.mobiledevelopment.laba2.ui.level3.ThirdLevelScreen
 import com.example.mobiledevelopment.laba2.ui.level4.FourthLevelScreen
 import com.example.mobiledevelopment.laba2.ui.result.ResultScreen
+import com.example.mobiledevelopment.laba2.ui.settings.SettingsScreen
 
 class GameActivity : ComponentActivity() {
 
@@ -124,6 +125,9 @@ class GameActivity : ComponentActivity() {
                     enabled = currentScreen != "menu"
                 ) {
                     when (currentScreen) {
+                        "settings" -> {
+                            currentScreen = "menu"
+                        }
                         "comic" -> {
                             if (comicPage > 0) {
                                 comicPage--
@@ -192,13 +196,14 @@ class GameActivity : ComponentActivity() {
                                 }
                             },
 
-                            onSettings = {},
+                            onSettings = { currentScreen = "settings" },
 
                             canContinue = firstLevelCompleted || questCompleted,
 
-                            settingsEnabled = false
+                            settingsEnabled = true
                         )
                     }
+                    "settings" -> SettingsScreen()
 
                     "comic" -> {
                         ComicScreen(
