@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_title">На поиски Джейка</string>
+    <string name="menu_new_game">Новая игра</string>
+    <string name="menu_continue">Продолжить</string>
+    <string name="menu_settings">Настройки</string>
+
+    <string name="comic_next">Далее</string>
+    <string name="comic_description">Вступительный комикс</string>
+    <string name="back_to_menu">В меню</string>
+    <string name="comic_morning">Сегодня утром</string>
+
+    <string name="princess_comic_title">У принцессы</string>
+    <string name="marceline_comic_title">У Марселин</string>
+    <string name="lumpy_comic_title">У Пупырки</string>
+
+    <string name="ending_finish">Далее</string>
+    <string name="ending_replay">Играть снова</string>
+
+    <string name="ending_title">Джейк\nнайден!</string>
+    <string name="ending_home">На главную</string>
+</resources>
