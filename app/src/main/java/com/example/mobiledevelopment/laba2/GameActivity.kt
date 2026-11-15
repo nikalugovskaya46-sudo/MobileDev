@@ -11,7 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
+import com.example.mobiledevelopment.laba2.ui.localization.localizedStringResource as stringResource
 import com.example.mobiledevelopment.R
 import com.example.mobiledevelopment.laba2.data.ProgressStorage
 import com.example.mobiledevelopment.laba2.ui.comic.ComicScreen
@@ -23,6 +23,8 @@ import com.example.mobiledevelopment.laba2.ui.level3.ThirdLevelScreen
 import com.example.mobiledevelopment.laba2.ui.level4.FourthLevelScreen
 import com.example.mobiledevelopment.laba2.ui.result.ResultScreen
 import com.example.mobiledevelopment.laba2.ui.settings.SettingsScreen
+import androidx.compose.runtime.CompositionLocalProvider
+import com.example.mobiledevelopment.laba2.ui.localization.LocalEnglish
 
 class GameActivity : ComponentActivity() {
 
@@ -64,8 +66,13 @@ class GameActivity : ComponentActivity() {
         val validItemIds = FirstLevelItems.items
             .map { it.id }
             .toSet()
-
+        val settingsPreferences = getSharedPreferences("quest_settings", MODE_PRIVATE)
         setContent {
+            var useEnglish by remember {
+                mutableStateOf(settingsPreferences.getBoolean("use_english", false))
+            }
+
+            CompositionLocalProvider(LocalEnglish provides useEnglish) {
             MaterialTheme {
                 var currentScreen by rememberSaveable {
                     mutableStateOf("menu")
@@ -203,7 +210,16 @@ class GameActivity : ComponentActivity() {
                             settingsEnabled = true
                         )
                     }
-                    "settings" -> SettingsScreen()
+
+                    "settings" -> SettingsScreen(
+                        onBack = { currentScreen = "menu" },
+                        onLanguageClick = {
+                            useEnglish = !useEnglish
+                            settingsPreferences.edit()
+                                .putBoolean("use_english", useEnglish)
+                                .apply()
+                        }
+                    )
 
                     "comic" -> {
                         ComicScreen(
@@ -386,6 +402,7 @@ class GameActivity : ComponentActivity() {
                             onRestart = startNewGame
                         )
                     }
+                }
                 }
             }
         }

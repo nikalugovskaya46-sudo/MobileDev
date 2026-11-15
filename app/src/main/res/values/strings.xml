@@ -4,4 +4,48 @@
     <string name="settings_language_code">RU</string>
     <string name="settings_music">Музыка</string>
     <string name="settings_music_on">ВКЛ</string>
+    <string name="menu_title_en">Find Jake</string>
+    <string name="menu_new_game_en">New Game</string>
+    <string name="menu_continue_en">Continue</string>
+    <string name="menu_settings_en">Settings</string>
+
+    <string name="settings_language_en">Language</string>
+    <string name="settings_language_code_en">EN</string>
+    <string name="settings_music_en">Music</string>
+    <string name="settings_music_on_en">ON</string>
+
+    <string name="comic_morning_en">This Morning</string>
+    <string name="comic_description_en">Comic page</string>
+    <string name="comic_next_en">Next</string>
+    <string name="princess_comic_title_en">Visiting Princess Bubblegum</string>
+    <string name="marceline_comic_title_en">Visiting Marceline</string>
+    <string name="lumpy_comic_title_en">Visiting LSP</string>
+
+    <string name="level1_title_en">Find Five Items!</string>
+    <string name="level1_instruction_en">Tap the five hidden items in the room to collect them.</string>
+    <string name="item_found_en">Found</string>
+    <string name="item_not_found_en">Not found</string>
+    <string name="level1_success_title_en">Well Done!</string>
+    <string name="level1_home_en">Main Menu</string>
+
+    <string name="level2_title_en">Fix the Pipes!</string>
+    <string name="level2_check_en">Start Flow</string>
+    <string name="level2_instruction_en">1. Tap a pipe to turn it 90°.\n\n2. Connect the inlet to the left of the top-left cell to the outlet below the bottom-right cell.\n\n3. Use all nine pipes.</string>
+    <string name="level2_error_en">The syrup is blocked. Check the pipe connections!</string>
+
+    <string name="level3_title_en">Put the Cards in the Right Order</string>
+    <string name="level3_play_en">Play the Song</string>
+
+    <string name="level4_title_en">Crack the Portal Code</string>
+    <string name="level4_spin_en">SPIN!</string>
+    <string name="level4_open_en">Open the Portal</string>
+    <string name="level4_instruction_en">1. Use the digits 1, 2, 3, and 4 once each.\n\n2. The second digit is one more than the first.\n\n3. The fourth digit is one more than the third.\n\n4. The first digit is greater than the third.</string>
+
+    <string name="ending_title_en">Jake Found!</string>
+    <string name="ending_finish_en">Finish</string>
+    <string name="ending_result_title_en">Jake\nFound!</string>
+    <string name="ending_replay_en">Play Again</string>
+    <string name="ending_home_en">Main Menu</string>
+    <string name="settings_back">Назад</string>
+    <string name="settings_back_en">Back</string>
 </resources>

@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.stringResource
+import com.example.mobiledevelopment.laba2.ui.localization.localizedStringResource as stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -34,6 +34,7 @@ private val SettingsTextColor = Color(0xFF451F00)
 @Composable
 fun SettingsScreen(
     modifier: Modifier = Modifier,
+    onBack: () -> Unit,
     onLanguageClick: () -> Unit = {},
     onMusicClick: () -> Unit = {}
 ) {
@@ -111,6 +112,11 @@ fun SettingsScreen(
                             value = stringResource(R.string.settings_music_on),
                             buttonWidth = 116.dp,
                             onClick = onMusicClick
+                        )
+                        MenuButton(
+                            text = stringResource(R.string.settings_back),
+                            onClick = onBack,
+                            modifier = Modifier.width(144.dp)
                         )
                     }
                 }
