@@ -6,19 +6,10 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.mobiledevelopment.R
 
 @Composable
 fun MenuButton(
@@ -45,22 +36,6 @@ fun MenuButton(
             disabledContentColor = Color.White
         )
     ) {
-        Text(
-            text = text,
-            fontFamily = FontFamily(
-                Font(R.font.brusbylyajka)
-            ),
-
-            fontSize = 20.sp,
-            textAlign = TextAlign.Center,
-
-            style = TextStyle(
-                shadow = Shadow(
-                    color = Color.Black,
-                    offset = Offset(2f, 2f),
-                    blurRadius = 1f
-                )
-            )
-        )
+        OutlinedText(text = text, strokeWidth = 3.dp)
     }
 }
