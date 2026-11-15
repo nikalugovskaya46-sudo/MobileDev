@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.stringResource
+import com.example.mobiledevelopment.laba2.ui.localization.localizedStringResource as stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mobiledevelopment.R
 import com.example.mobiledevelopment.laba2.ui.components.MenuButton
 import com.example.mobiledevelopment.laba2.ui.level1.LevelCompleteDialog
+import com.example.mobiledevelopment.laba2.ui.components.LevelHeader
 
 private val TextColor = Color(0xFF451F00)
 private val BorderColor = Color(0xFF4A3503)
@@ -85,23 +86,22 @@ fun SecondLevelScreen(
                     vertical = 16.dp
                 ),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            PipePanel(
-                modifier = Modifier
-                    .widthIn(max = 420.dp)
-                    .fillMaxWidth()
+            LevelHeader(
+                onHomeClick = onBackToMenu,
+                modifier = Modifier.widthIn(max = 420.dp)
             ) {
-                Text(
-                    text = stringResource(
-                        R.string.level2_title
-                    ),
-                    color = TextColor,
-                    fontFamily = PixelFont,
-                    fontSize = 28.sp,
-                    lineHeight = 34.sp,
-                    textAlign = TextAlign.Center
-                )
+                PipePanel(modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        text = stringResource(R.string.level2_title),
+                        color = TextColor,
+                        fontFamily = PixelFont,
+                        fontSize = 28.sp,
+                        lineHeight = 34.sp,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
 
             BoxWithConstraints(

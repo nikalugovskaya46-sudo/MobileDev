@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.stringResource
+import com.example.mobiledevelopment.laba2.ui.localization.localizedStringResource as stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mobiledevelopment.R
 import com.example.mobiledevelopment.laba2.ui.components.MenuButton
 import com.example.mobiledevelopment.laba2.ui.level1.LevelCompleteDialog
+import com.example.mobiledevelopment.laba2.ui.components.LevelHeader
 
 @Composable
 fun ThirdLevelScreen(
@@ -67,30 +68,26 @@ fun ThirdLevelScreen(
                 ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Surface(
-                modifier = Modifier
-                    .widthIn(max = 480.dp)
-                    .fillMaxWidth(),
-                color = Color(0xFFFDF4DE),
-                shape = RoundedCornerShape(16.dp),
-                border = BorderStroke(
-                    width = 2.dp,
-                    color = Color(0xFF4A3503)
-                )
+            LevelHeader(
+                onHomeClick = onBackToMenu,
+                modifier = Modifier.widthIn(max = 480.dp)
             ) {
-                Text(
-                    text = stringResource(
-                        R.string.level3_title
-                    ),
-                    modifier = Modifier.padding(12.dp),
-                    color = Color(0xFF451F00),
-                    fontFamily = FontFamily(
-                        Font(R.font.brusbylyajka)
-                    ),
-                    fontSize = 24.sp,
-                    lineHeight = 28.sp,
-                    textAlign = TextAlign.Center
-                )
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = Color(0xFFFDF4DE),
+                    shape = RoundedCornerShape(16.dp),
+                    border = BorderStroke(2.dp, Color(0xFF4A3503))
+                ) {
+                    Text(
+                        text = stringResource(R.string.level3_title),
+                        modifier = Modifier.padding(12.dp),
+                        color = Color(0xFF451F00),
+                        fontFamily = FontFamily(Font(R.font.brusbylyajka)),
+                        fontSize = 24.sp,
+                        lineHeight = 28.sp,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
 
             Spacer(

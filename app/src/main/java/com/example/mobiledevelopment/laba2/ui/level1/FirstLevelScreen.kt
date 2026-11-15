@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.stringResource
+import com.example.mobiledevelopment.laba2.ui.localization.localizedStringResource as stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobiledevelopment.R
+import com.example.mobiledevelopment.laba2.ui.components.LevelHeader
 
 @Composable
 fun FirstLevelScreen(
@@ -126,26 +127,23 @@ fun FirstLevelScreen(
             )
         }
 
-        LevelPanel(
+        LevelHeader(
+            onHomeClick = onBackToMenu,
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .fillMaxWidth()
                 .statusBarsPadding()
-                .padding(
-                    horizontal = 24.dp,
-                    vertical = 8.dp
-                )
+                .padding(horizontal = 24.dp, vertical = 8.dp)
         ) {
-            Text(
-                text = stringResource(
-                    R.string.level1_title
-                ),
-                color = LevelTextColor,
-                fontFamily = LevelFont,
-                fontSize = 24.sp,
-                lineHeight = 28.sp,
-                textAlign = TextAlign.Center
-            )
+            LevelPanel(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = stringResource(R.string.level1_title),
+                    color = LevelTextColor,
+                    fontFamily = LevelFont,
+                    fontSize = 24.sp,
+                    lineHeight = 28.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
 
         Column(

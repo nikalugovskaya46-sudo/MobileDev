@@ -11,7 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
+import com.example.mobiledevelopment.laba2.ui.localization.localizedStringResource as stringResource
 import com.example.mobiledevelopment.R
 import com.example.mobiledevelopment.laba2.data.ProgressStorage
 import com.example.mobiledevelopment.laba2.ui.comic.ComicScreen
@@ -22,8 +22,20 @@ import com.example.mobiledevelopment.laba2.ui.level2.SecondLevelScreen
 import com.example.mobiledevelopment.laba2.ui.level3.ThirdLevelScreen
 import com.example.mobiledevelopment.laba2.ui.level4.FourthLevelScreen
 import com.example.mobiledevelopment.laba2.ui.result.ResultScreen
+import com.example.mobiledevelopment.laba2.ui.settings.SettingsScreen
+import androidx.compose.runtime.CompositionLocalProvider
+import com.example.mobiledevelopment.laba2.ui.localization.LocalEnglish
+import com.example.mobiledevelopment.laba2.audio.BackgroundMusic
 
 class GameActivity : ComponentActivity() {
+
+    private val settingsPreferences by lazy {
+        getSharedPreferences("quest_settings", MODE_PRIVATE)
+    }
+
+    private val backgroundMusic by lazy {
+        BackgroundMusic(applicationContext)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,8 +75,16 @@ class GameActivity : ComponentActivity() {
         val validItemIds = FirstLevelItems.items
             .map { it.id }
             .toSet()
-
+        val settingsPreferences = getSharedPreferences("quest_settings", MODE_PRIVATE)
         setContent {
+            var useEnglish by remember {
+                mutableStateOf(settingsPreferences.getBoolean("use_english", false))
+            }
+            var musicEnabled by remember {
+                mutableStateOf(settingsPreferences.getBoolean("music_enabled", true))
+            }
+
+            CompositionLocalProvider(LocalEnglish provides useEnglish) {
             MaterialTheme {
                 var currentScreen by rememberSaveable {
                     mutableStateOf("menu")
@@ -124,6 +144,9 @@ class GameActivity : ComponentActivity() {
                     enabled = currentScreen != "menu"
                 ) {
                     when (currentScreen) {
+                        "settings" -> {
+                            currentScreen = "menu"
+                        }
                         "comic" -> {
                             if (comicPage > 0) {
                                 comicPage--
@@ -192,13 +215,36 @@ class GameActivity : ComponentActivity() {
                                 }
                             },
 
-                            onSettings = {},
+                            onSettings = { currentScreen = "settings" },
 
                             canContinue = firstLevelCompleted || questCompleted,
 
-                            settingsEnabled = false
+                            settingsEnabled = true
                         )
                     }
+
+                    "settings" -> SettingsScreen(
+                        onBack = { currentScreen = "menu" },
+                        musicEnabled = musicEnabled,
+                        onLanguageClick = {
+                            useEnglish = !useEnglish
+                            settingsPreferences.edit()
+                                .putBoolean("use_english", useEnglish)
+                                .apply()
+                        },
+                        onMusicClick = {
+                            musicEnabled = !musicEnabled
+                            settingsPreferences.edit()
+                                .putBoolean("music_enabled", musicEnabled)
+                                .apply()
+
+                            if (musicEnabled) {
+                                backgroundMusic.start()
+                            } else {
+                                backgroundMusic.stop()
+                            }
+                        }
+                    )
 
                     "comic" -> {
                         ComicScreen(
@@ -382,7 +428,19 @@ class GameActivity : ComponentActivity() {
                         )
                     }
                 }
+                }
             }
         }
+    }
+    override fun onStart() {
+        super.onStart()
+        if (settingsPreferences.getBoolean("music_enabled", true)) {
+            backgroundMusic.start()
+        }
+    }
+
+    override fun onStop() {
+        backgroundMusic.stop()
+        super.onStop()
     }
 }
